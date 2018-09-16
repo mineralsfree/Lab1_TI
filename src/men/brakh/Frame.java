@@ -3,18 +3,16 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import men.brakh.*;
+
 public class Frame extends JFrame {
     static String onlyEng(String s) {
-        return s.replaceAll("[^A-Za-zÀ]", "").toUpperCase();
+        return s.replaceAll("[^A-Za-zï¿½]", "").toUpperCase();
     }
 
 
@@ -32,6 +30,11 @@ public class Field extends JTextField{
 	}
 }
 	public static void main(String[] args) {
+		Pleifer pf = new Pleifer();
+
+		System.out.println(pf.encode("CIPHERTEXT",1));
+		System.out.println(pf.decode(pf.encode("CIPHERTEXT",1),1));
+
 		Frame app = new Frame();
 		JRadioButton jbEncode = new JRadioButton("encode");
 		JRadioButton jbDecode = new JRadioButton("decode");
@@ -96,9 +99,6 @@ public class Field extends JTextField{
 		panel.add(decodetf);
 		panel.add(decodeta);
 		panel.add(decodeButton);
-
-//		panel.add(jbEncode);
-	//	panel.add(jbDecode);
 		
 		
 		app.setVisible(true);
