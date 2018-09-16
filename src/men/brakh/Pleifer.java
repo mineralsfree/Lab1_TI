@@ -18,7 +18,7 @@ public class Pleifer implements Cipher{
     }
 
     @Override
-    public String encode(String message, int key) {
+    public String encode(String message, String key) {
         Fillarr(keyArray);
         String encodedString ="";
         if (message.length()%2 !=0) {
@@ -76,7 +76,7 @@ public class Pleifer implements Cipher{
 
 
     @Override
-    public String decode(String message, int key) {
+    public String decode(String message, String key) {
         Fillarr(keyArray);
         String decodedString ="";
         if (message.length()%2 !=0) {

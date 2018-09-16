@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.*;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,16 +25,49 @@ public class Frame extends JFrame {
 		setBounds(100,100,400,400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-public class Field extends JTextField{
+public static class Field extends JTextField{
 	public Field() {
 		
 	}
-}
-	public static void main(String[] args) {
-		Pleifer pf = new Pleifer();
+	private static String readFile2(File fin) throws IOException {
 
-		System.out.println(pf.encode("CIPHERTEXT",1));
-		System.out.println(pf.decode(pf.encode("CIPHERTEXT",1),1));
+		Viginer pf = new Viginer();
+		System.out.println(pf.encode("CRYPTOGRAPHY","MODE"));
+		FileInputStream fis = new FileInputStream(fin);
+
+		//Construct BufferedReader from InputStreamReader
+		BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+		String OUT = "";
+		String line = "";
+		while ((line = br.readLine()) != null) {
+			OUT +=line;
+		}
+
+		br.close();
+		return OUT;
+	}
+
+}
+	public static void main(String[] args) throws IOException {
+		Pleifer pf = new Pleifer();
+		File input = new File("C:\\Users\\User\\Documents\\GitHub\\Lab1_TI\\src\\men\\brakh\\Input.txt");
+		File output= new File("C:\\Users\\User\\Documents\\GitHub\\Lab1_TI\\src\\men\\brakh\\Output.txt");
+
+		String inputString = Field.readFile2(input);
+		FileWriter fw = new FileWriter(output);
+		if (inputString!=null){
+			try {
+				fw.write(pf.encode(inputString,""));
+				fw.flush();
+			}catch (IOException e){
+
+			}
+		}
+		fw.close();
+
+
+		//System.out.println(pf.encode("inputString",1));
+		//System.out.println(pf.decode(pf.encode("CIPHERTEXT",1),1));
 
 		Frame app = new Frame();
 		JRadioButton jbEncode = new JRadioButton("encode");
@@ -69,7 +103,7 @@ public class Field extends JTextField{
 			
 			message.toUpperCase();
 			RailWay rw = new RailWay();	
-			String encodedMessage = rw.encode(message, Integer.parseInt(key));
+			String encodedMessage = rw.encode(message, key);
 			ta2.setText("");
 			ta2.setText(encodedMessage);
 			encodetf.setText(encodedMessage);
@@ -85,7 +119,7 @@ public class Field extends JTextField{
 				
 				message.toUpperCase();
 				RailWay rw = new RailWay();	
-				String decodedMessage = rw.decode(message, Integer.parseInt(key));
+				String decodedMessage = rw.decode(message,key);
 				ta2.setText("");
 				ta2.setText(decodedMessage);
 				decodetf.setText(decodedMessage);

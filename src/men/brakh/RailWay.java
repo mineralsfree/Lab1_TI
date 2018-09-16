@@ -15,7 +15,8 @@ public class RailWay implements Cipher{
         return 2*row;
 	}
 	@Override
-	public String encode(String message, int key) {
+	public String encode(String message, String ke) {
+		int key = Integer.parseInt(ke);
 		String encodedString ="";
 		for (int row =0;row<key;row++) {
 			int num=0;
@@ -31,7 +32,8 @@ public class RailWay implements Cipher{
 	}
 
 	@Override
-	public String decode(String message, int key) {
+	public String decode(String message, String ke) {
+		int key = Integer.parseInt(ke);
 		int pos =0;
 		StringBuilder decodedString = new StringBuilder(message);
 		for (int row = 0;row<key;row++) {
