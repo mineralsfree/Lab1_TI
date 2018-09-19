@@ -4,12 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.*;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 public class Frame extends JFrame {
     static String onlyEng(String s) {
@@ -50,10 +45,31 @@ public static class Field extends JTextField{
 }
 	public static void main(String[] args) throws IOException {
 		Pleifer pf = new Pleifer();
+		Viginer vg = new Viginer();
+		RailWay rw = new RailWay();
+
+		JRadioButton english = new JRadioButton("english");
+		JRadioButton russian = new JRadioButton("russian");
+		JRadioButton encode = new JRadioButton("encode");
+		JRadioButton decode = new JRadioButton("decode");
+		JRadioButton Pleifer = new JRadioButton("Pleifer");
+		JRadioButton Railway = new JRadioButton("Railway");
+		JRadioButton Viginer = new JRadioButton("Viginer");
+		ButtonGroup lang = new ButtonGroup();
+		ButtonGroup operation = new ButtonGroup();
+		ButtonGroup Type = new ButtonGroup();
+		Type.add(Pleifer);
+		Type.add(Railway);
+		Type.add(Viginer);
+		operation.add(encode);
+		operation.add(decode);
+		lang.add(english);
+		lang.add(russian);
 		File input = new File("C:\\Users\\User\\Documents\\GitHub\\Lab1_TI\\src\\men\\brakh\\Input.txt");
 		File output= new File("C:\\Users\\User\\Documents\\GitHub\\Lab1_TI\\src\\men\\brakh\\Output.txt");
-
+		File key = new File("C:\\Users\\User\\Documents\\GitHub\\Lab1_TI\\src\\men\\brakh\\key.txt");
 		String inputString = Field.readFile2(input);
+		String keyString = Field.readFile2(key);
 		FileWriter fw = new FileWriter(output);
 		if (inputString!=null){
 			try {
@@ -64,75 +80,40 @@ public static class Field extends JTextField{
 			}
 		}
 		fw.close();
-
-
-		//System.out.println(pf.encode("inputString",1));
-		//System.out.println(pf.decode(pf.encode("CIPHERTEXT",1),1));
-
 		Frame app = new Frame();
-		JRadioButton jbEncode = new JRadioButton("encode");
-		JRadioButton jbDecode = new JRadioButton("decode");
-		
 		JPanel panel = new JPanel(new  GridLayout(6,3));
 		app.add(panel);
 		//app
 		app.getContentPane().setBackground(Color.darkGray);
-		 JTextField encodetf = new JTextField(1);
-		 JTextArea encodeta= new JTextArea();
-		 JTextField decodetf = new JTextField(1);
-		 JTextArea decodeta = new JTextArea();
+
 		 JButton encodeButton = new JButton();
-		 JButton decodeButton = new JButton();
 		 JTextArea ta2 = new JTextArea();
-		 
-		 decodetf.setText("Enter Decode key");
-		 decodeta.setText("Enter String to Decode");
-		 
-		 encodetf.setBackground(new Color(204, 166, 166));		 
-		 encodetf.setText("Enter key");
-		 encodeta.setText("Enter text to encode");
-		encodeButton.setText("encode");
-		decodeButton.setText("decode");
+		encodeButton.setText("Perfom Action");
 		
 		encodeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			String	key = encodetf.getText();
-			String	message = encodeta.getText();
+			String message = inputString;
 			message = onlyEng(message);
-			
+			String key = keyString;
 			message.toUpperCase();
-			RailWay rw = new RailWay();	
+			
 			String encodedMessage = rw.encode(message, key);
-			ta2.setText("");
-			ta2.setText(encodedMessage);
-			encodetf.setText(encodedMessage);
+
 			}
 		}
             );
-		decodeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String	key = decodetf.getText();
-				String	message = decodeta.getText();
-				message = onlyEng(message);
-				
-				message.toUpperCase();
-				RailWay rw = new RailWay();	
-				String decodedMessage = rw.decode(message,key);
-				ta2.setText("");
-				ta2.setText(decodedMessage);
-				decodetf.setText(decodedMessage);
-				
-			}
-		});
-		panel.add(encodetf);
-		panel.add(encodeta);
-		
+
+
+		panel.add(decode);
+		panel.add(encode);
+		panel.add(russian);
+		panel.add(english);
+		panel.add(Pleifer);
+		panel.add(Railway);
+		panel.add(Viginer);
 		panel.add(encodeButton);
-		panel.add(decodetf);
-		panel.add(decodeta);
-		panel.add(decodeButton);
+
 		
 		
 		app.setVisible(true);
