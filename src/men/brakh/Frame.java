@@ -47,8 +47,9 @@ public static class Field extends JTextField{
 }
 	public static void main(String[] args) throws IOException {
 		Pleifer pf = new Pleifer();
-
-
+		JTextField encodetf = new JTextField(1);
+		encodetf.setBackground(new Color(204, 166, 166));
+		encodetf.setText("Enter key");
 		JRadioButton english = new JRadioButton("english");
 		JRadioButton russian = new JRadioButton("russian");
 		JRadioButton encode = new JRadioButton("encode");
@@ -85,6 +86,8 @@ public static class Field extends JTextField{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			String message = inputString;
+			String	key = encodetf.getText();
+
 				String OutputString = "";
 			if (russian.isSelected()){
 				message=Frame.onlyRus(message);
@@ -92,7 +95,7 @@ public static class Field extends JTextField{
 			} else{
 				message=Frame.onlyEng(message);
 			}
-			String key = keyString;
+			//String key = keyString;
 			if (encode.isSelected()){
 				if (Viginer.isSelected()){
 					Viginer vg = new Viginer();
@@ -141,7 +144,7 @@ public static class Field extends JTextField{
 			}
 		}
             );
-
+		panel.add(encodetf);
 		panel.add(decode);
 		panel.add(encode);
 		panel.add(russian);
