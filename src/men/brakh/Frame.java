@@ -70,9 +70,9 @@ public static class Field extends JTextField{
 		encode.setSelected(true);
 		english.setSelected(true);
 		Pleifer.setSelected(true);
-		File Source = new File("C:\\Users\\MI\\Documents\\GitHub\\lol\\Lab1_TI\\src\\men\\brakh\\Source.txt");
-		File Encoded = new File("C:\\Users\\MI\\Documents\\GitHub\\lol\\Lab1_TI\\src\\men\\brakh\\Encoded.txt");
-		File decoded = new File("C:\\Users\\MI\\Documents\\GitHub\\lol\\Lab1_TI\\src\\men\\brakh\\Decoded.txt");
+		File Source = new File("C:\\Users\\User\\Documents\\GitHub\\Lab1_TI\\src\\men\\brakh\\Source.txt");
+		File Encoded = new File("C:\\Users\\User\\Documents\\GitHub\\Lab1_TI\\src\\men\\brakh\\Encoded.txt");
+		File decoded = new File("C:\\Users\\User\\Documents\\GitHub\\Lab1_TI\\src\\men\\brakh\\Decoded.txt");
 		String SourceString = Field.readFile2(Source);
 		String EncodedString = Field.readFile2(Encoded);
 		Frame app = new Frame();
@@ -85,18 +85,21 @@ public static class Field extends JTextField{
 		encodeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			String message = SourceString;
+
 			String	key = encodetf.getText();
 
 				String OutputString = "";
-			if (russian.isSelected()){
-				message=Frame.onlyRus(message);
 
-			} else{
-				message=Frame.onlyEng(message);
-			}
-			//String key = keyString;
+
 			if (encode.isSelected()){
+					String message = SourceString;
+				if (russian.isSelected()){
+					message=Frame.onlyRus(message);
+
+				} else{
+					message=Frame.onlyEng(message);
+				}
+
 				if (Viginer.isSelected()){
 					Viginer vg = new Viginer();
 					 OutputString = vg.encode(message,key);
@@ -110,6 +113,14 @@ public static class Field extends JTextField{
 					 OutputString = rw.encode(message,key);
 				}
 			}	else{
+				String message = EncodedString;
+				if (russian.isSelected()){
+					message=Frame.onlyRus(message);
+
+				} else{
+					message=Frame.onlyEng(message);
+				}
+
 				if (Viginer.isSelected()){
 					Viginer vg = new Viginer();
 					 OutputString = vg.decode(message,key);
@@ -129,7 +140,7 @@ public static class Field extends JTextField{
 						fw = new FileWriter(Encoded);
 					}
 					if (decode.isSelected()){
-						fw = new FileWriter(Decoded);
+						fw = new FileWriter(decoded);
 					}
 
 				} catch (IOException e1) {

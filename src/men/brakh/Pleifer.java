@@ -53,13 +53,13 @@ public class Pleifer implements Cipher{
         int i2 = GetCharCoordinates(second).getI();
         int j2 = GetCharCoordinates(second).getJ();
         if ((j1==j2)&&(i1!=i2)){
-            ret += getChar(new Coordinates((i1+1)%(ARRSIZE-1),j1));
-            ret +=(getChar(new Coordinates((i2+1)%(ARRSIZE-1),j2)));
+            ret += getChar(new Coordinates((i1+1)%(ARRSIZE),j1));
+            ret +=(getChar(new Coordinates((i2+1)%(ARRSIZE),j2)));
             return ret;
         }
         if ((i1 ==i2 )&&(j1!=j2)){
-            ret += getChar(new Coordinates((i1),(j1+1)%(ARRSIZE-1)));
-            ret +=(getChar(new Coordinates((i2),(j2+1)%(ARRSIZE-1))));
+            ret += getChar(new Coordinates((i1),(j1+1)%(ARRSIZE)));
+            ret +=(getChar(new Coordinates((i2),(j2+1)%(ARRSIZE))));
             return ret;
         }
         if ((i1!=i2)&&(j2!=j1)){
