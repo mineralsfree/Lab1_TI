@@ -8,7 +8,7 @@ public class Viginer implements Cipher {
         String modkey = getKey(key,message);
         System.out.println(modkey);
         for (int i=0;i<message.length();i++){
-            ret+=cipherChar(message.charAt(i),(modkey.charAt(i)-'A'));
+            ret+=cipherChar(message.charAt(i),(modkey.charAt(i)-'А'));
         }
         return ret;
     }
@@ -28,8 +28,8 @@ public class Viginer implements Cipher {
         int len = msg.length();
         for(int x = 0; x < len; x++){
             char c = (char)(msg.charAt(x) + shift);
-            if (c > 'Z')
-                s += (char)(msg.charAt(x) - (26-shift));
+            if (c > 'Я')
+                s += (char)(msg.charAt(x) - (33-shift));
             else
                 s += (char)(msg.charAt(x) + shift);
         }
@@ -39,8 +39,8 @@ public class Viginer implements Cipher {
         char s = 0;
 
             char c = (char)(x + shift);
-            if (c > 'Z')
-                s += (char)(x - (26-shift));
+            if (c > 'Я')
+                s += (char)(x - (33-shift));
             else
                 s += (char)(x + shift);
 
