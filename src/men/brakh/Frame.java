@@ -70,11 +70,11 @@ public static class Field extends JTextField{
 		encode.setSelected(true);
 		english.setSelected(true);
 		Pleifer.setSelected(true);
-		File input = new File("C:\\Users\\User\\Documents\\GitHub\\Lab1_TI\\src\\men\\brakh\\Input.txt");
-		File output= new File("C:\\Users\\User\\Documents\\GitHub\\Lab1_TI\\src\\men\\brakh\\Output.txt");
-		File key = new File("C:\\Users\\User\\Documents\\GitHub\\Lab1_TI\\src\\men\\brakh\\key.txt");
-		String inputString = Field.readFile2(input);
-		String keyString = Field.readFile2(key);
+		File Source = new File("C:\\Users\\MI\\Documents\\GitHub\\lol\\Lab1_TI\\src\\men\\brakh\\Source.txt");
+		File Encoded = new File("C:\\Users\\MI\\Documents\\GitHub\\lol\\Lab1_TI\\src\\men\\brakh\\Encoded.txt");
+		File decoded = new File("C:\\Users\\MI\\Documents\\GitHub\\lol\\Lab1_TI\\src\\men\\brakh\\Decoded.txt");
+		String SourceString = Field.readFile2(Source);
+		String EncodedString = Field.readFile2(Encoded);
 		Frame app = new Frame();
 		JPanel panel = new JPanel(new  GridLayout(6,3));
 		app.add(panel);
@@ -85,7 +85,7 @@ public static class Field extends JTextField{
 		encodeButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			String message = inputString;
+			String message = SourceString;
 			String	key = encodetf.getText();
 
 				String OutputString = "";
@@ -125,18 +125,23 @@ public static class Field extends JTextField{
 			}
 				FileWriter fw = null;
 				try {
-					fw = new FileWriter(output);
+					if( encode.isSelected()){
+						fw = new FileWriter(Encoded);
+					}
+					if (decode.isSelected()){
+						fw = new FileWriter(Decoded);
+					}
+
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 				try {
-				if (inputString!=null){
 
-						fw.write(OutputString);
-						fw.flush();
-					}
+					assert fw != null;
+					fw.write(OutputString);
+					fw.flush();
 
-				fw.close();}catch (IOException l){
+					fw.close();}catch (IOException ignored){
 
 				}
 
