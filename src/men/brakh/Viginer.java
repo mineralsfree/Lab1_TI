@@ -1,43 +1,41 @@
 package men.brakh;
-
 public class Viginer implements Cipher {
-    public static String alphabet  ="АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+    private String alphabet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+    public Viginer() {
+    }
+    private String generateKey(String key, int len) {
+        StringBuilder progrKey = new StringBuilder(len);
+
+        for (int i = 0; i <= len; i++) {
+            int tmp = (alphabet.indexOf(key.charAt(i % (key.length()))) + (i/key.length())) % alphabet.length();
+            progrKey.append(alphabet.charAt(tmp));
+        }
+
+        return progrKey.toString();
+    }
     @Override
-    public String encode(String message, String key) {
-        String ret =  "";
-        String modkey = getKey(key,message);
-        System.out.println(modkey);
-        for (int i=0;i<message.length();i++){
-            ret+=cipherChar(message.charAt(i),(alphabet.indexOf(modkey.charAt(i))));
+    public String encode(String message, String keyword) {
+        String progrKey = generateKey(keyword, message.length());
+        StringBuilder cipherText = new StringBuilder(message);
+        for(int i = 0; i < message.length(); i++) {
+            // f(a) = (a + k) mod N
+            int charIndex = (alphabet.indexOf(message.charAt(i)) +
+                    alphabet.indexOf(progrKey.charAt(i))) % alphabet.length();
+            cipherText.setCharAt(i,alphabet.charAt(charIndex));
         }
-        return ret;
+        return cipherText.toString();
     }
-
-    private String getKey(String key,String msg) {
-        String ret ="";
-        int a =0;
-        while (ret.length()<msg.length()){
-            ret+=cipher(key, a);
-            a++;
-        }
-        return ret;
-    }
-
-    private String cipher(String msg, int shift){
-        String s = "";
-        int len = msg.length();
-        for(int x = 0; x < len; x++){
-            char c = alphabet.charAt((alphabet.indexOf(msg.charAt(x))+ shift)%alphabet.length());
-               s += c;
-        }
-        return s;
-    }
-    private char cipherChar(char x, int shift){
-        return alphabet.charAt((alphabet.indexOf(x)+ shift)%alphabet.length());
-    }
-
     @Override
-    public String decode(String message, String key) {
-        return null;
+    public String decode(String message, String keyword) {
+        String progrKey = generateKey(keyword, message.length());
+        StringBuilder plaintext = new StringBuilder(message);
+        for(int i = 0; i < message.length(); i++) {
+            // a = (f(a) + (N-k)) mod N
+            int charIndex = (alphabet.indexOf(message.charAt(i)) +
+                    (alphabet.length() - alphabet.indexOf(progrKey.charAt(i)))) % alphabet.length();
+            plaintext.setCharAt(i,alphabet.charAt(charIndex));
+        }
+        return plaintext.toString();
     }
+
 }

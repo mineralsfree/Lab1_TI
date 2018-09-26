@@ -11,7 +11,7 @@ public class Frame extends JFrame {
         return s.replaceAll("[^A-Za-z�]", "").toUpperCase();
     }
 	static String onlyRus(String s) {
-		return s.replaceAll("[^А-Яа-я�]", "").toUpperCase();
+		return s.replaceAll("[^А-Яа-яёЁА]", "").toUpperCase();
 	}
 
 	public Frame() {
@@ -49,7 +49,7 @@ public static class Field extends JTextField{
 		Pleifer pf = new Pleifer();
 		JTextField encodetf = new JTextField(1);
 		encodetf.setBackground(new Color(204, 166, 166));
-		encodetf.setText("Enter key");
+		encodetf.setText("БРАХМЕН");
 		JRadioButton english = new JRadioButton("english");
 		JRadioButton russian = new JRadioButton("russian");
 		JRadioButton encode = new JRadioButton("encode");
