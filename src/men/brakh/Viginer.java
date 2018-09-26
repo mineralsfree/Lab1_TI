@@ -1,14 +1,14 @@
 package men.brakh;
 
 public class Viginer implements Cipher {
-
+    public static String alphabet  ="АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
     @Override
     public String encode(String message, String key) {
         String ret =  "";
         String modkey = getKey(key,message);
         System.out.println(modkey);
         for (int i=0;i<message.length();i++){
-            ret+=cipherChar(message.charAt(i),(modkey.charAt(i)-'А'));
+            ret+=cipherChar(message.charAt(i),(alphabet.indexOf(modkey.charAt(i))));
         }
         return ret;
     }
@@ -27,24 +27,13 @@ public class Viginer implements Cipher {
         String s = "";
         int len = msg.length();
         for(int x = 0; x < len; x++){
-            char c = (char)(msg.charAt(x) + shift);
-            if (c > 'Я')
-                s += (char)(msg.charAt(x) - (33-shift));
-            else
-                s += (char)(msg.charAt(x) + shift);
+            char c = alphabet.charAt((alphabet.indexOf(msg.charAt(x))+ shift)%alphabet.length());
+               s += c;
         }
         return s;
     }
     private char cipherChar(char x, int shift){
-        char s = 0;
-
-            char c = (char)(x + shift);
-            if (c > 'Я')
-                s += (char)(x - (33-shift));
-            else
-                s += (char)(x + shift);
-
-        return s;
+        return alphabet.charAt((alphabet.indexOf(x)+ shift)%alphabet.length());
     }
 
     @Override

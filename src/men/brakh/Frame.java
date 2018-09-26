@@ -29,7 +29,7 @@ public static class Field extends JTextField{
 	private static String readFile2(File fin) throws IOException {
 
 		Viginer pf = new Viginer();
-		System.out.println(pf.encode("CRYPTOGRAPHY","MODE"));
+		//System.out.println(pf.encode("CRYPTOGRAPHY","MODE"));
 		FileInputStream fis = new FileInputStream(fin);
 
 		//Construct BufferedReader from InputStreamReader
@@ -86,7 +86,7 @@ public static class Field extends JTextField{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-			String	key = encodetf.getText();
+			String	key = encodetf.getText().toUpperCase();
 
 				String OutputString = "";
 
@@ -99,7 +99,7 @@ public static class Field extends JTextField{
 				} else{
 					message=Frame.onlyEng(message);
 				}
-
+					message = message.toUpperCase();
 				if (Viginer.isSelected()){
 					Viginer vg = new Viginer();
 					 OutputString = vg.encode(message,key);
@@ -114,6 +114,7 @@ public static class Field extends JTextField{
 				}
 			}	else{
 				String message = EncodedString;
+				message = message.toUpperCase();
 				if (russian.isSelected()){
 					message=Frame.onlyRus(message);
 

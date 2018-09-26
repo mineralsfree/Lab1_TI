@@ -48,10 +48,13 @@ public class Pleifer implements Cipher{
     }
     private String getEncodedPair(char first, char second) {
         String ret = "";
+        System.out.println(first );
+        System.out.println(second);
         int i1 = GetCharCoordinates(first).getI();
         int j1 = GetCharCoordinates(first).getJ();
         int i2 = GetCharCoordinates(second).getI();
         int j2 = GetCharCoordinates(second).getJ();
+
         if ((j1==j2)&&(i1!=i2)){
             ret += getChar(new Coordinates((i1+1)%(ARRSIZE),j1));
             ret +=(getChar(new Coordinates((i2+1)%(ARRSIZE),j2)));
