@@ -21,6 +21,13 @@ public class Pleifer implements Cipher{
     public String encode(String message, String key) {
         Fillarr(keyArray);
         String encodedString ="";
+        StringBuilder messageSB = new StringBuilder(message);
+        for (int i=1; i< message.length();i++){
+            if (messageSB.charAt(i)==messageSB.charAt(i-1)){
+                messageSB.insert(i,"X");
+            }
+        }
+        message = messageSB.toString();
         if (message.length()%2 !=0) {
             message = message + "X";
         }

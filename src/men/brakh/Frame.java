@@ -13,6 +13,12 @@ public class Frame extends JFrame {
 	static String onlyRus(String s) {
 		return s.replaceAll("[^А-Яа-яёЁА]", "").toUpperCase();
 	}
+	static void dialogMSG(String message, String title) {
+		JOptionPane.showMessageDialog(null,
+				message,
+				title,
+				JOptionPane.PLAIN_MESSAGE);
+	}
 
 	public Frame() {
 		super("Enter Key and Text to shifr");
@@ -70,9 +76,9 @@ public static class Field extends JTextField{
 		encode.setSelected(true);
 		english.setSelected(true);
 		Pleifer.setSelected(true);
-		File Source = new File("C:\\Users\\User\\Documents\\GitHub\\Lab1_TI\\src\\men\\brakh\\Source.txt");
-		File Encoded = new File("C:\\Users\\User\\Documents\\GitHub\\Lab1_TI\\src\\men\\brakh\\Encoded.txt");
-		File decoded = new File("C:\\Users\\User\\Documents\\GitHub\\Lab1_TI\\src\\men\\brakh\\Decoded.txt");
+		File Source = new File("C:\\Users\\MI\\Documents\\GitHub\\lol\\Lab1_TI\\src\\men\\brakh\\Source.txt");
+		File Encoded = new File("C:\\Users\\MI\\Documents\\GitHub\\lol\\Lab1_TI\\src\\men\\brakh\\Encoded.txt");
+		File decoded = new File("C:\\Users\\MI\\Documents\\GitHub\\lol\\Lab1_TI\\src\\men\\brakh\\Decoded.txt");
 		String SourceString = Field.readFile2(Source);
 		String EncodedString = Field.readFile2(Encoded);
 		Frame app = new Frame();
@@ -87,7 +93,10 @@ public static class Field extends JTextField{
 			public void actionPerformed(ActionEvent e) {
 
 			String	key = encodetf.getText().toUpperCase();
-
+			if (key.equals("")) {
+				Frame.dialogMSG("bad key","lol");
+				return;
+			}
 				String OutputString = "";
 
 
@@ -107,6 +116,7 @@ public static class Field extends JTextField{
 				if (Pleifer.isSelected()){
 					Pleifer pf = new Pleifer();
 					 OutputString = pf.encode(message,key);
+
 				}
 				if (Railway.isSelected()){
 					RailWay rw = new RailWay();
@@ -129,10 +139,18 @@ public static class Field extends JTextField{
 				if (Pleifer.isSelected()){
 					Pleifer pf = new Pleifer();
 					 OutputString = pf.decode(message,key);
+					//StringBuilder sb = new StringBuilder(OutputString);
+					//for (int i =0; i<OutputString.length()-3;i++){
+					//	if ((OutputString.charAt(i)==OutputString.charAt(i+2)&&(OutputString.charAt(i+1)=='X'))){
+					//		sb.deleteCharAt(i+1);
+					//	}
+					//}
+					//OutputString = sb.toString();
 				}
 				if (Railway.isSelected()){
 					RailWay rw = new RailWay();
 					 OutputString = rw.decode(message,key);
+
 				}
 			}
 				FileWriter fw = null;
